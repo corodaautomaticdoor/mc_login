@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"email\": \"garychavez@gmail.com\",\r\n  \"userName\": \"gary\",\r\n  \"password\": \"123456\"\r\n  }\r\n\r\n\r\n\r\n\r\n\r\n{\r\n  \"typeOperation\": 0,\r\n  \"numberDocument\": 71723707,\r\n  \"detail\": [\r\n\r\n    {\r\n      \"model\": \"PG02\",\r\n      \"quantity\": 3\r\n    }\r\n  ]\r\n}",
+					"raw": "{\r\n  \"email\": \"garychavezj@gmail.com\",\r\n  \"password\": \"123456\",\r\n  \"rolId\": 1\r\n  }\r\n\r\n\r\n\r\n\r\n\r\n{\r\n  \"typeOperation\": 0,\r\n  \"numberDocument\": 71723707,\r\n  \"detail\": [\r\n\r\n    {\r\n      \"model\": \"PG02\",\r\n      \"quantity\": 3\r\n    }\r\n  ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -99,7 +99,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"loginId\": 1,\r\n        \"email\": \"garychavez@gmail.com\",\r\n        \"userName\": \"garucho\",\r\n        \"password\": \"123456\"\r\n}",
+					"raw": "{\r\n  \"loginId\": 3,\r\n  \"email\": \"admin@corodaautomaticdoor.com\",\r\n  \"password\": \"coroda\",\r\n  \"rolId\": 0        \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -107,7 +107,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8026/login/1",
+					"raw": "http://localhost:8026/login/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -115,7 +115,39 @@
 					"port": "8026",
 					"path": [
 						"login",
-						"1"
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"email\": \"garychavezj@gmail.com\",\r\n        \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8026/login/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8026",
+					"path": [
+						"login",
+						"validate"
 					]
 				}
 			},

@@ -18,11 +18,12 @@ public class Login {
     @Email
     private String email;
 
-    @Column(name = "userName")
-    private String userName;
-
     @Column(name = "password")
     private String password;
+
+    @Column(name = "rolId")
+    private RolLogin rolId;
+
 
 
 }

@@ -5,7 +5,9 @@ import com.coroda.mclogin.dao.LoginDao;
 import com.coroda.mclogin.model.api.request.Request;
 import com.coroda.mclogin.model.api.response.Response;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,13 +35,18 @@ public class LoginServiceImplement implements LoginService {
     }
 
     @Override
-    public Observable<Response> getById(Long operationId) {
+    public Single<Response> getById(Long operationId) {
         return loginDao.getById(operationId);
     }
 
     @Override
     public Observable<Response> findAll() {
         return loginDao.findAll();
+    }
+
+    @Override
+    public Maybe<Response> getValidate(Request request) {
+        return loginDao.validLogin(request.getEmail(),request.getPassword());
     }
 
 }

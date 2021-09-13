@@ -5,7 +5,9 @@ import com.coroda.mclogin.model.api.request.Request;
 import com.coroda.mclogin.model.api.response.Response;
 import com.coroda.mclogin.util.Constants;
 import io.reactivex.Completable;
+import io.reactivex.Maybe;
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -44,7 +46,7 @@ public class LoginController {
 
     @GetMapping(Constants.ID)
     @ApiOperation(value = Constants.GET_ID_VALUE, notes = Constants.GET_ID_NOTE)
-    public Observable<Response> getById(@PathVariable("id") Long operationId) {
+    public Single<Response> getById(@PathVariable("id") Long operationId) {
         log.info("Obtencion de datos por id");
         return loginService.getById(operationId);
     }
@@ -54,6 +56,13 @@ public class LoginController {
     public Observable<Response> getFindAll() {
         log.info("Enviando parametros de busqueda");
         return loginService.findAll();
+    }
+
+    @GetMapping(Constants.VALIDATE)
+    @ApiOperation(value = Constants.GET_VALIDATE_VALUE, notes = Constants.GET_VALIDATE_NOTE)
+    public Maybe<Response> getValidate(@RequestBody Request request) {
+        log.info("Valida el Datos del Usuario");
+        return loginService.getValidate(request);
     }
 
 }

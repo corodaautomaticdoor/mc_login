@@ -12,7 +12,9 @@ public interface LoginRepository extends JpaRepository<Login, Long> {
     @Query("from Login o where o.loginId =:loginId")
     List<Login> searchId (@Param("loginId")Long loginId);
 
-    @Query(" from Login o where o.userName =:userName and o.password=:password")
-    List<Login> validLogin(@Param("userName") String userName ,@Param("password") String password );
+    @Query(" from Login o where o.email =:email and o.password=:password")
+    List<Login> validLogin(@Param("email") String email ,@Param("password") String password );
+    @Query(" from Login o where o.email =:email and o.password=:password")
+    Login validLogin1(@Param("email") String email ,@Param("password") String password );
 
 }

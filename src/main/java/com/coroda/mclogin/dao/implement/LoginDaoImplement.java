@@ -4,6 +4,7 @@ import com.coroda.mclogin.dao.LoginDao;
 import com.coroda.mclogin.model.api.request.*;
 import com.coroda.mclogin.model.api.response.Response;
 import com.coroda.mclogin.model.entity.*;
+import com.coroda.mclogin.model.thirtparthy.Person;
 import com.coroda.mclogin.repository.LoginRepository;
 import io.reactivex.*;
 import io.reactivex.Observable;
@@ -11,17 +12,28 @@ import io.reactivex.schedulers.Schedulers;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.client.RestTemplate;
 
 import javax.ws.rs.BadRequestException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Repository
 @Slf4j
 @Data
 public class LoginDaoImplement implements LoginDao {
 
+
+    @Autowired
+    private RestTemplate clienteRest;
+
     @Autowired
     private LoginRepository loginRepository;
+
+    @Value("${service-person.ribbon.listOfServer}")
+    private String dataPerson;
 
     @Override
     public Completable save(Request request) {
@@ -59,21 +71,30 @@ public class LoginDaoImplement implements LoginDao {
         log.info("seteo de datos de login del metodo save");
         Login lo = new Login();
         lo.setLoginId(model.getLoginId());
-        lo.setUserName(model.getUserName());
         lo.setEmail(model.getEmail());
         lo.setPassword(model.getPassword());
+        lo.setRolId(model.getRolId());
         return lo;
     }
 
     @Override
-    public Observable<Response>  getById(Long loginId) {
+    public Single<Response>  getById(Long loginId) {
         log.info("Extrayendo reistros del login acorde al Id");
-        return Observable.fromIterable(loginRepository.searchId(loginId))
-                .filter(obj -> obj.getLoginId().equals(loginId))
-                .map(operacion -> getLogin(operacion))
-                .subscribeOn(Schedulers.io());
+        return maybeLogin(loginId)
+                .map(login -> getLogin(login))
+                .toSingle();
+//        return Observable.fromIterable(loginRepository.searchId(loginId))
+//                .filter(obj -> obj.getLoginId().equals(loginId))
+//                .map(operacion -> getLogin(operacion))
+//                .subscribeOn(Schedulers.io());
     }
-
+    private Maybe<Login> maybeLogin(Long loginId){
+        log.info("buscando por id y obteniendo los campos");
+        return Maybe.just(
+                loginRepository.findById(loginId)
+                        .<BadRequestException>orElseThrow(BadRequestException::new))
+                .switchIfEmpty(Maybe.empty());
+    }
     @Override
     public Observable<Response> findAll() {
         log.info("seteo de todos los datos registrados");
@@ -83,12 +104,12 @@ public class LoginDaoImplement implements LoginDao {
     }
 
     @Override
-    public Observable<Response> validLogin(String userName, String password) {
+    public Maybe<Response> validLogin(String email, String password) {
         log.info("Retorna comprobacion del Login");
-        return Observable.fromIterable(loginRepository.validLogin(userName,password))
-                .filter(objClient -> objClient.getUserName().equals(userName) &&
+        return Observable.fromIterable(loginRepository.validLogin(email,password))
+                .filter(objClient -> objClient.getEmail().equals(email) &&
                         objClient.getPassword().equals(password))
-                .map(login -> getLogin(login))
+                .map(login -> getLogin(login)).firstElement()
                 .subscribeOn(Schedulers.io());
     }
 
@@ -97,9 +118,17 @@ public class LoginDaoImplement implements LoginDao {
         Response rs = new Response();
         rs.setLoginId(model.getLoginId());
         rs.setEmail(model.getEmail());
-        rs.setUserName(model.getUserName());
-        rs.setPassword(model.getPassword());
+        rs.setRol(model.getRolId());
+        rs.setInformation(getPerson(model.getEmail()));
         return rs;
+    }
+//    public List<Person> getPerson(String email) {
+    public Person getPerson(String email) {
+        Map<String,String> pathVariables= new HashMap<String,String>();
+        pathVariables.put("email",email);
+        log.info("Extrayendo registros de Cliente");
+        Person person= clienteRest.getForObject(dataPerson, Person.class,pathVariables);
+        return person;
     }
 
 }

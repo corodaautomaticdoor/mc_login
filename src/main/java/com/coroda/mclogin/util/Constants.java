@@ -4,6 +4,7 @@ public class Constants {
 
     public final static String MAIN_PATH = "/login";
     public final static String ID = "/{id}";
+    public final static String VALIDATE = "/validate";
 
     public final static String SAVE_VALUE="Metodo a traves del cual se envia la informacion del Login que  sera registrada dentro de la base de datos";
     public final static String SAVE_NOTE="Para el registro del Login , sera necesario el llenado de todo los campos , a excepcion de los Id´s los cuales seran generados automaticamente";
@@ -16,5 +17,7 @@ public class Constants {
 
     public final static String GET_FIND_ALL_VALUE="Metodo a traves del cual se Obtiene todos los registros del Login";
     public final static String GET_FIND_ALL_NOTE="Para la obtencion de datos del Login  no es necesario enviar ningun id ";
+    public final static String GET_VALIDATE_VALUE="Metodo a traves del cual se validan los datos del usuario";
+    public final static String GET_VALIDATE_NOTE="Para la obtencion de datos del Login  es necesario enviar el correo y la constraseña ";
 
 }
