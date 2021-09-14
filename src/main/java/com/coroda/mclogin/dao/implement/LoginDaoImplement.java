@@ -1,5 +1,7 @@
 package com.coroda.mclogin.dao.implement;
 
+import com.coroda.exception.DataException;
+import com.coroda.exception.ResourceNotFoundException;
 import com.coroda.mclogin.dao.LoginDao;
 import com.coroda.mclogin.model.api.request.*;
 import com.coroda.mclogin.model.api.response.Response;
@@ -100,6 +102,8 @@ public class LoginDaoImplement implements LoginDao {
         log.info("seteo de todos los datos registrados");
         return Observable.fromIterable(loginRepository.findAll())
                 .map(login -> getLogin(login))
+                .switchIfEmpty(Observable
+                        .error( new ResourceNotFoundException("No se encontraron registros")))
                 .subscribeOn(Schedulers.io());
     }
 
@@ -107,9 +111,12 @@ public class LoginDaoImplement implements LoginDao {
     public Maybe<Response> validLogin(String email, String password) {
         log.info("Retorna comprobacion del Login");
         return Observable.fromIterable(loginRepository.validLogin(email,password))
+                .switchIfEmpty(Observable
+                        .error( new DataException("contraseña o correo erroneo")))
                 .filter(objClient -> objClient.getEmail().equals(email) &&
                         objClient.getPassword().equals(password))
-                .map(login -> getLogin(login)).firstElement()
+                .map(login -> getLogin(login))
+                .firstElement()
                 .subscribeOn(Schedulers.io());
     }
 
