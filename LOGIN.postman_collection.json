@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"email\": \"garychavezj@gmail.com\",\r\n  \"password\": \"123456\",\r\n  \"rolId\": 1\r\n  }\r\n\r\n\r\n\r\n\r\n\r\n{\r\n  \"typeOperation\": 0,\r\n  \"numberDocument\": 71723707,\r\n  \"detail\": [\r\n\r\n    {\r\n      \"model\": \"PG02\",\r\n      \"quantity\": 3\r\n    }\r\n  ]\r\n}",
+					"raw": "{\r\n  \"email\": \"prueba@gmail.com\",\r\n  \"password\": \"123456\",\r\n  \"rolId\": 1\r\n  }\r\n\r\n\r\n\r\n\r\n\r\n{\r\n  \"typeOperation\": 0,\r\n  \"numberDocument\": 71723707,\r\n  \"detail\": [\r\n\r\n    {\r\n      \"model\": \"PG02\",\r\n      \"quantity\": 3\r\n    }\r\n  ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -107,7 +107,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8026/login/2",
+					"raw": "http://localhost:8026/login/3",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -115,7 +115,7 @@
 					"port": "8026",
 					"path": [
 						"login",
-						"2"
+						"3"
 					]
 				}
 			},
@@ -131,7 +131,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n        \"email\": \"garychavezj@gmail.com\",\r\n        \"password\": \"123456\"\r\n}",
+					"raw": "{\r\n        \"email\": \"garychavezj@gmail.com\",\r\n        \"password\": \"123452\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
