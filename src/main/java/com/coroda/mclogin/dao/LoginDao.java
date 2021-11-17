@@ -16,5 +16,4 @@ public interface LoginDao {
     Observable<Response> findAll();
 
     Maybe<Response> validLogin(String email , String password);
-
 }

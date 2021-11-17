@@ -82,21 +82,15 @@ public class LoginDaoImplement implements LoginDao {
     @Override
     public Single<Response>  getById(Long loginId) {
         log.info("Extrayendo reistros del login acorde al Id");
-        return maybeLogin(loginId)
-                .map(login -> getLogin(login))
+        return Observable.fromIterable(loginRepository.searchId(loginId))
+                .switchIfEmpty(Observable
+                        .error( new ResourceNotFoundException("No se encontro el registro")))
+                .filter(obj -> obj.getLoginId().equals(loginId))
+                .map(operacion -> getLogin(operacion))
+                .firstElement()
                 .toSingle();
-//        return Observable.fromIterable(loginRepository.searchId(loginId))
-//                .filter(obj -> obj.getLoginId().equals(loginId))
-//                .map(operacion -> getLogin(operacion))
-//                .subscribeOn(Schedulers.io());
     }
-    private Maybe<Login> maybeLogin(Long loginId){
-        log.info("buscando por id y obteniendo los campos");
-        return Maybe.just(
-                loginRepository.findById(loginId)
-                        .<BadRequestException>orElseThrow(BadRequestException::new))
-                .switchIfEmpty(Maybe.empty());
-    }
+
     @Override
     public Observable<Response> findAll() {
         log.info("seteo de todos los datos registrados");
@@ -129,7 +123,7 @@ public class LoginDaoImplement implements LoginDao {
         rs.setInformation(getPerson(model.getEmail()));
         return rs;
     }
-//    public List<Person> getPerson(String email) {
+
     public Person getPerson(String email) {
         Map<String,String> pathVariables= new HashMap<String,String>();
         pathVariables.put("email",email);
