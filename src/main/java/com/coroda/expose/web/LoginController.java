@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(Constants.MAIN_PATH)
 @Api(tags = "Microservicio Login", description = "Esta API se encarga de la gestion el Logeo de los usuarios")
@@ -25,7 +27,7 @@ public class LoginController {
 
     @PostMapping
     @ApiOperation(value = Constants.SAVE_VALUE, notes = Constants.SAVE_NOTE)
-    public Completable save(@RequestBody Request request) {
+    public Completable save(@Valid @RequestBody Request request) {
         log.info("Envio de parametros");
         return loginService.save(request);
     }
@@ -58,8 +60,8 @@ public class LoginController {
         return loginService.findAll();
     }
 
-    @GetMapping(Constants.VALIDATE)
-    @ApiOperation(value = Constants.GET_VALIDATE_VALUE, notes = Constants.GET_VALIDATE_NOTE)
+    @PostMapping(Constants.VALIDATE)
+    @ApiOperation(value = Constants.POST_VALIDATE_VALUE, notes = Constants.POST_VALIDATE_NOTE)
     public Maybe<Response> getValidate(@RequestBody Request request) {
         log.info("Valida el Datos del Usuario");
         return loginService.getValidate(request);

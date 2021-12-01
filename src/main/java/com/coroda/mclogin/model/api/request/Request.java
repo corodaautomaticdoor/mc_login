@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.Email;
+
 @Data
 @ApiModel("Model Request")
 public class Request {
@@ -13,6 +15,7 @@ public class Request {
     private Long loginId;
 
     @ApiModelProperty(value = "email", required = true , position = 2)
+    @Email(message = "Ingresar un correo valido")
     private String email;
 
     @ApiModelProperty(value = "password", required = true , position = 3)

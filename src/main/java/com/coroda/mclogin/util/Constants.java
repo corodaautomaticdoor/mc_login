@@ -17,7 +17,7 @@ public class Constants {
 
     public final static String GET_FIND_ALL_VALUE="Metodo a traves del cual se Obtiene todos los registros del Login";
     public final static String GET_FIND_ALL_NOTE="Para la obtencion de datos del Login  no es necesario enviar ningun id ";
-    public final static String GET_VALIDATE_VALUE="Metodo a traves del cual se validan los datos del usuario";
-    public final static String GET_VALIDATE_NOTE="Para la obtencion de datos del Login  es necesario enviar el correo y la constraseña ";
+    public final static String POST_VALIDATE_VALUE="Metodo a traves del cual se validan los datos del usuario";
+    public final static String POST_VALIDATE_NOTE="Para la obtencion de datos del Login  es necesario enviar el correo y la constraseña ";
 
 }
