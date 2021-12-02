@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(Constants.MAIN_PATH)
 @Api(tags = "Microservicio Login", description = "Esta API se encarga de la gestion el Logeo de los usuarios")
 @Slf4j
@@ -25,7 +26,7 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
-    @CrossOrigin
+//    @CrossOrigin
     @PostMapping
     @ApiOperation(value = Constants.SAVE_VALUE, notes = Constants.SAVE_NOTE)
     public Completable save(@Valid @RequestBody Request request) {
@@ -33,7 +34,7 @@ public class LoginController {
         return loginService.save(request);
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @DeleteMapping(Constants.ID)
     @ApiOperation(value = Constants.DELETE_ID_VALUE, notes = Constants.DELETE_ID_NOTE)
     public Completable delete(@PathVariable("id") Long operationId) {
@@ -41,7 +42,7 @@ public class LoginController {
         return loginService.delete(operationId);
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @PutMapping(Constants.ID)
     @ApiOperation(value = Constants.UPDATE_ID_VALUE, notes = Constants.UPDATE_ID_NOTE)
     public Completable update(@RequestBody Request request) {
@@ -49,7 +50,7 @@ public class LoginController {
         return loginService.update(request);
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @GetMapping(Constants.ID)
     @ApiOperation(value = Constants.GET_ID_VALUE, notes = Constants.GET_ID_NOTE)
     public Single<Response> getById(@PathVariable("id") Long operationId) {
@@ -57,7 +58,7 @@ public class LoginController {
         return loginService.getById(operationId);
     }
 
-    @CrossOrigin
+//    @CrossOrigin
     @GetMapping
     @ApiOperation(value = Constants.GET_FIND_ALL_VALUE, notes = Constants.GET_FIND_ALL_NOTE)
     public Observable<Response> getFindAll() {
