@@ -1,0 +1,157 @@
+{
+	"info": {
+		"_postman_id": "fd2d09ed-413e-4288-b0ff-21c6f92bf70f",
+		"name": "LOGIN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post Login Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"prueba@gmail.com\",\r\n  \"password\": \"123456\",\r\n  \"rolId\": 1\r\n  }\r\n\r\n\r\n\r\n\r\n\r\n{\r\n  \"typeOperation\": 0,\r\n  \"numberDocument\": 71723707,\r\n  \"detail\": [\r\n\r\n    {\r\n      \"model\": \"PG02\",\r\n      \"quantity\": 3\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8026/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8026",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Login por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8026/login/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8026",
+					"path": [
+						"login",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Elimina Login",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8026/login/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8026",
+					"path": [
+						"login",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8026/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8026",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualiza Login",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"loginId\": 3,\r\n  \"email\": \"admin@corodaautomaticdoor.com\",\r\n  \"password\": \"coroda\",\r\n  \"rolId\": 0        \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8026/login/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8026",
+					"path": [
+						"login",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"email\": \"garychavezj@gmail.com\",\r\n        \"password\": \"123452\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8026/login/validate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8026",
+					"path": [
+						"login",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
