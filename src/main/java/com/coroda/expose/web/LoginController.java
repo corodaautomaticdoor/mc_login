@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 @RequestMapping(Constants.MAIN_PATH)
@@ -61,10 +62,17 @@ public class LoginController {
     }
 
     @PostMapping(Constants.VALIDATE)
-    @ApiOperation(value = Constants.POST_VALIDATE_VALUE, notes = Constants.POST_VALIDATE_NOTE)
+    @ApiOperation(value = Constants.VALIDATE_VALUE, notes = Constants.VALIDATE_NOTE)
     public Maybe<Response> getValidate(@RequestBody Request request) {
         log.info("Valida el Datos del Usuario");
         return loginService.getValidate(request);
+    }
+
+    @GetMapping(Constants.VALIDATE_ACCOUNT)
+    @ApiOperation(value = Constants.VALIDATE_VALUE, notes = Constants.VALIDATE_NOTE)
+    public Maybe<Response> getData(@RequestParam Map<String, String> params) {
+        log.info("Enviando parametros de busqueda");
+        return loginService.getData(params);
     }
 
 }

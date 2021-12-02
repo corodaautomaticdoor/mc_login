@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 @Slf4j
 public class LoginServiceImplement implements LoginService {
@@ -47,6 +49,15 @@ public class LoginServiceImplement implements LoginService {
     @Override
     public Maybe<Response> getValidate(Request request) {
         return loginDao.validLogin(request.getEmail(),request.getPassword());
+    }
+
+    @Override
+    public Maybe<Response> getData(Map<String, String> params) {
+        log.info("Busqueda Dinamica");
+        Maybe<Response> LoginResponse = null;
+        String email = params.get("email");;
+        String password = params.get("password");
+        return loginDao.validLogin(email,password);
     }
 
 }

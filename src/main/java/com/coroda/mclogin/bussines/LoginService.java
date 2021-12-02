@@ -7,6 +7,8 @@ import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
 
+import java.util.Map;
+
 public interface LoginService {
 
     Completable save(Request request);
@@ -15,4 +17,5 @@ public interface LoginService {
     Single<Response> getById (Long operationId);
     Observable<Response> findAll();
     Maybe<Response> getValidate (Request request);
+    Maybe<Response> getData(Map<String, String> params);
 }
